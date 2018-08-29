@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pandora beta</title>
+</head>
+<body>
+    <div id="app">
+        <p id="data">empty</p>
+    </div>
+</body>
+</html>
+
+<style>
+    #data {
+        background-color: #eee;
+        padding: 5px;
+    }
+</style>
+
+<script src="pandora.js"></script>
+<script>
+
+    var pandora = new Pandora();
+    
+    pandora.box("animals", ['name', 'species', 'weigth']);
+    
+    var animals = pandora.box.animals; // init
+
+    animals.insert([true, "druppy", "dog", "10kg"]);
+    animals.insert([true, "kitty", "cat", "5kg"]);
+    
+    var record = animals.read("druppy","name");
+    var id = animals.find("druppy","name");
+    console.log(record); // find all record using a parameter
+    console.log(id); // find record id using a parameter
+    
+    animals.delete("druppy","name"); // finds record using a parameter and delete it
+    animals.delete(1); // invokes an error
+    
+    animals.update(1, ["rex", "wolf"], ["name", "species"] ); // invokes an error
+    animals.update(2, "meow", "name" ); // it works
+    
+    console.log(animals); // there is one record with id=2 and name=meow
+    
+</script>
